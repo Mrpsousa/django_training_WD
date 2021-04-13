@@ -4,7 +4,7 @@ from django.test import TestCase
 from project.subscriptions.forms import SubscriptionForm
 
 
-class SubscribeTest(TestCase):
+class SubscribeGet(TestCase):
     def setUp(self):
         self.response = self.client.get('/inscricao/')
 
@@ -41,10 +41,10 @@ class SubscribeTest(TestCase):
                                  list(form.fields))
 
 
-class SubscribePostTest(TestCase):
+class SubscribePostValid(TestCase):
     def setUp(self):
         data = dict(name='Marcos Rogerio', cpf='03388885629',
-                    email='urameshi.uba@gmail.com', phone='71-99250-0187')
+                    email='mrpsousa@outlook.com', phone='71-99250-0187')
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
@@ -55,38 +55,8 @@ class SubscribePostTest(TestCase):
         """ TODO """
         self.assertEqual(1, len(mail.outbox))
 
-    def test_subscription_email_subject(self):
-        """ TODO """
-        email = mail.outbox[0]
-        expect = 'Confirmação de inscrição'
 
-        self.assertEqual(expect, email.subject)
-
-    def test_subscription_email_from(self):
-        """ TODO """
-        email = mail.outbox[0]
-        expect = 'contato@eventex.com.br'
-
-        self.assertEqual(expect, email.from_email)
-
-    def test_subscription_email_to(self):
-        """ TODO """
-        email = mail.outbox[0]
-        expect = ['contato@eventex.com.br', 'urameshi.uba@gmail.com']
-
-        self.assertEqual(expect, email.to)
-
-    def test_subscription_email_body(self):
-        """ TODO """
-        email = mail.outbox[0]
-
-        self.assertIn('Marcos Rogerio', email.body)
-        self.assertIn('03388885629', email.body)
-        self.assertIn('urameshi.uba@gmail.com', email.body)
-        self.assertIn('71-99250-0187', email.body)
-
-
-class SubscribeInvalidPost(TestCase):
+class SubscribePostInvalid(TestCase):
     def setUp(self):
         self.response = self.client.post('/inscricao/', {})
 
