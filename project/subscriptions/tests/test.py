@@ -2,6 +2,7 @@
 from django.core import mail
 from django.test import TestCase
 from project.subscriptions.forms import SubscriptionForm
+from ..models import Subscription
 
 
 class SubscribeGet(TestCase):
@@ -55,6 +56,9 @@ class SubscribePostValid(TestCase):
         """ TODO """
         self.assertEqual(1, len(mail.outbox))
 
+    def test_save_subscription(self):
+        self.assertTrue(Subscription.objects.exists())
+
 
 class SubscribePostInvalid(TestCase):
     def setUp(self):
@@ -66,7 +70,8 @@ class SubscribePostInvalid(TestCase):
 
     def test_template(self):
         """ Invalid Post should not redirect """
-        self.assertTemplateUsed(self.response, 'subscriptions/subscription_form.html')
+        self.assertTemplateUsed(
+            self.response, 'subscriptions/subscription_form.html')
 
     def test_has_form(self):
         form = self.response.context['form']
@@ -75,7 +80,10 @@ class SubscribePostInvalid(TestCase):
     def test_form_has_erros(self):
         form = self.response.context['form']
         self.assertTrue(form.errors)
-        
+
+    def test_dont_save_subscription(self):
+        self.assertFalse(Subscription.objects.exists())
+
 
 class SubscribeSucessMessage(TestCase):
     def test_message(self):
