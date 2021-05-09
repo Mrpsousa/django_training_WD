@@ -122,3 +122,5 @@ node_modules/
 webpack-stats.json
 
 htmlcov/*
+.coverage
+db.sqlite3
