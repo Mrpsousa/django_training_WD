@@ -46,3 +46,6 @@
 
 ### Attention
     - python3 manage.py collectstatic
+
+### Run Tests
+    - coverage run manage.py test
