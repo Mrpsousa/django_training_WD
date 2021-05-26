@@ -2,6 +2,7 @@ from django.test import TestCase
 from ..models import Subscription
 from django.shortcuts import resolve_url as r
 
+
 class SubscriptionDetailGet(TestCase):
     def setUp(self):
         self.obj = Subscription.objects.create(name='Marcos Rogerio',
