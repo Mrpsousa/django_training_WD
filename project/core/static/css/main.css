@@ -347,6 +347,19 @@ section header h2 {
     }
 
 }
+.speakers h2 {
+    text-transform: uppercase;
+}
+
+.speakers img {
+    width: 200px;
+    border-radius: 100%;
+}
+
+.speakers img.photo{
+    float: left;
+    padding-right: 15px;
+}
 
 
 /* Fim Customização */

@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import project.core.views
+from project.core.views import home, speaker_detail
 
 urlpatterns = [
-    path('', project.core.views.home, name='home'),
+    path('', home, name='home'),
     path('inscricao/', include('project.subscriptions.urls')),
+    path('palestrantes/<slug:slug>/', speaker_detail, name='speaker_detail'),
     path('admin/', admin.site.urls),
 ]
